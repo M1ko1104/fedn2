@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
+import SignOutButton from "../auth/SignOutButton";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -163,7 +164,7 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
               fill=""
             />
           </svg>
-          Sign out
+          <SignOutButton />
         </Link>
       </Dropdown>
     </div>
