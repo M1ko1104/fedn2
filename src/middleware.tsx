@@ -23,11 +23,11 @@ export function middleware(req: NextRequest) {
   }
 
 // 🔒 For all other routes, require token
-  if (!token) {
+ /* if (!token) {
     const loginUrl = new URL('/signin', req.url);
     loginUrl.searchParams.set('from', pathname); // optional redirect after login
     return NextResponse.redirect(loginUrl);
-  }
+  }*/
 
   
 

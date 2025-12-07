@@ -1,24 +1,21 @@
-import { Outfit } from 'next/font/google';
-import './globals.css';
+import "./globals.css";
+import React from "react";
 
-import { SidebarProvider } from '@/context/SidebarContext';
-import { ThemeProvider } from '@/context/ThemeContext';
-
-const outfit = Outfit({
-  subsets: ["latin"],
-});
+export const metadata = {
+  title: "GenZmephim",
+  description: "Trang đặt vé xem phim",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} dark:bg-gray-900`}>
-        <ThemeProvider>
-          <SidebarProvider>{children}</SidebarProvider>
-        </ThemeProvider>
+      {/* Thêm suppressHydrationWarning={true} vào body để tắt lỗi do extension */}
+      <body suppressHydrationWarning={true} className="bg-[#020d1e] text-white">
+        {children}
       </body>
     </html>
   );

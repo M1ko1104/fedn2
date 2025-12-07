@@ -1,39 +1,35 @@
 "use client";
-
-import { useSidebar } from "@/context/SidebarContext";
-import AppHeader from "@/layout/AppHeader";
-import AppSidebar from "@/layout/AppSidebar";
-import Backdrop from "@/layout/Backdrop";
 import React from "react";
+// Import ThemeProvider (Hãy chắc chắn đường dẫn đúng với dự án của bạn)
+import { ThemeProvider } from "@/context/ThemeContext"; 
+import { SidebarProvider } from "@/context/SidebarContext";
+import AppSidebar from "@/layout/AppSidebar"; // Check lại đường dẫn import này
+import AppHeader from "@/layout/AppHeader";   // Check lại đường dẫn import này
+import Backdrop from "@/layout/Backdrop";     // Check lại đường dẫn import này
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { isExpanded, isHovered, isMobileOpen } = useSidebar();
-
-  // Dynamic class for main content margin based on sidebar state
-  const mainContentMargin = isMobileOpen
-    ? "ml-0"
-    : isExpanded || isHovered
-    ? "lg:ml-[290px]"
-    : "lg:ml-[90px]";
-
+// Component con để dùng hook
+function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen xl:flex">
-      {/* Sidebar and Backdrop */}
+    <div className="min-h-screen xl:flex bg-gray-100 dark:bg-gray-900 text-black dark:text-white transition-colors duration-300">
       <AppSidebar />
       <Backdrop />
-      {/* Main Content Area */}
-      <div
-        className={`flex-1 transition-all  duration-300 ease-in-out ${mainContentMargin}`}
-      >
-        {/* Header */}
+      <div className="flex-1 transition-all duration-300 ease-in-out lg:ml-[290px]">
         <AppHeader />
-        {/* Page Content */}
-        <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">{children}</div>
+        <div className="p-4 mx-auto max-w-screen-2xl md:p-6">
+          {children}
+        </div>
       </div>
     </div>
+  );
+}
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  return (
+    // BẮT BUỘC PHẢI CÓ ThemeProvider BAO NGOÀI CÙNG
+    <ThemeProvider>
+      <SidebarProvider>
+        <AdminLayoutContent>{children}</AdminLayoutContent>
+      </SidebarProvider>
+    </ThemeProvider>
   );
 }
